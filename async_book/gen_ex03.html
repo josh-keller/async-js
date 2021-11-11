@@ -1,0 +1,57 @@
+<html>
+
+  <script>
+
+  function *counter() {
+    let x = 1;
+    const result = [];
+
+    while (true) {
+      result.splice(0);
+      for (; x < x + 30; x++) {
+        result.push(x);
+      }
+
+      yield Promise.resolve(result);
+    }
+  }
+
+  async function* generator(repo) {
+    while (true) {
+      const response = await ;
+
+      const data = await response.json();
+
+      for (let commit of data) {
+        yield commit;
+      }
+
+      const link = response.headers.get('Link');
+      repo = /<(.*?)>; rel="next"/.exec(link)?. [1];
+
+      console.log('*************************');
+
+      
+      if (repo === undefined) {
+        break;
+      }
+
+      console.log('Fetching a new batch', link);
+    }
+  }
+
+  async function getCommits(repo) {
+    let i = 0;
+
+    for await (const commit of generator(repo)) {
+      console.log(commit);
+
+      if (++i === 90) {
+        break;
+      }
+    }
+  }
+
+  getCommits('https://api.github.com/repos/tc39/proposal-temporal/commits');
+</script>
+</html>
