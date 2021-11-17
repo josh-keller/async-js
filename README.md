@@ -5,10 +5,10 @@ concepts in JavaScript. I make no promises that it will be well documented, but
 hopefully there are some interesting things in here. Mostly it is a place for me
 to store and share things I'm working out.
 
-The async book mentioned is *Modern Asynchronous JavaScript* by Faraz K.
+The async book mentioned is [*Modern Asynchronous JavaScript*](https://pragprog.com/titles/fkajs/modern-asynchronous-javascript/) by Faraz K.
 Kelhini.
 
-The folder `simpson` is explorations I have made from lectures by Kyle Simpson.
+The folder `simpson` is explorations I have made from lectures by Kyle Simpson, mainly [this talk](https://github.com/wboard82/async-playground/blob/main/runner.js).
 
 Other code is my own attempts at implementing various async features such as
 Promises and some of their methods. My promise implementation owes some of its
