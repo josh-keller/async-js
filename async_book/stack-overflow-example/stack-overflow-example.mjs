@@ -11,6 +11,15 @@ const model = {
   }
 }
 
+function remove(arr, value) {
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i] === value) {
+      arr.splice(i, 1);
+      break;
+    }
+  }
+}
+
 function doLongRequestForBatch(batch) {
   return new Promise((resolve, reject) => {
     setTimeout(
@@ -19,7 +28,7 @@ function doLongRequestForBatch(batch) {
         console.log("Processed batch: ", upper);
         resolve(200);
       },
-      1000
+      Math.floor(Math.random() * 1000 + 400)
     )
   });
 }
@@ -27,7 +36,7 @@ function doLongRequestForBatch(batch) {
 async function batchRequests(options) {
   let query = { offset: 0, limit: options.limit };
   let batch = [];
-  let promises = [];
+  let pendingPromises = [];
 
   do {
     batch = await model.findAll(query);
@@ -36,27 +45,17 @@ async function batchRequests(options) {
     if (batch.length) {
       console.log("Making request for: ", batch);
       const promise = doLongRequestForBatch(batch).then(() => {
-        // Once complete, pop this promise from our array
-        // so that we know we can add another batch in its place
-        for (let i = 0; i < promises.length; i++) {
-          if (promises[i] === promise) {
-            promises.splice(i, 1);
-            break;
-          }
-        }
+        remove(pendingPromises, promise);
       });
-      promises.push(promise);
+      pendingPromises.push(promise);
 
-      // Once we hit our concurrency limit, wait for at least one promise to
-      // resolve before continuing to batch off requests
-      if (promises.length >= options.concurrentBatches) {
-        await Promise.race(promises);
+      if (pendingPromises.length >= options.concurrentBatches) {
+        await Promise.race(pendingPromises);
       }
     }
   } while (batch.length);
 
-  // Wait for remaining batches to finish
-  return Promise.all(promises);
+  return Promise.all(pendingPromises);
 }
 
 batchRequests({ limit: 3, concurrentBatches: 5 });

@@ -59,4 +59,31 @@ function *main() {
   console.log(archivedOrders, currentOrders);
 }
 
+async function asyncMain() {
+  var user = (await fetchCurrentUser()); 
+
+  console.log(user);
+
+  var [ archivedOrders, currentOrders ] = 
+    await Promise.all([
+      fetchArchivedOrders( user.id ),
+      fetchCurrentOrders( user.id )
+    ]);
+
+  console.log(archivedOrders, currentOrders);
+}
 runner(main);
+
+asyncMain();
+
+// const it = main();
+// let nextVal = it.next().value;
+
+// nextVal.then(data => {
+//   let nextNextVal = it.next(data).value;
+//   it.next(nextNextVal);
+// });
+
+
+
+

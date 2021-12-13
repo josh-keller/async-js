@@ -1,0 +1,11 @@
+
+
+
+SET query (this has options for the query)
+SET batch by making DB query
+
+WHILE batch is not empty
+  - increment offset property of query
+  - make request using query
+  - await the result
+  - SET batch by making DB query

@@ -1,0 +1,11 @@
+SET query
+SET batch by making a DB request
+SET pendingPromises = to empty array
+
+WHILE batch is not empty
+  - increment offset property of query
+  - SET promise to the return of making request
+  - ADD promise to pendingPromises
+  - IF length of pendingPromises >= concurrency limit
+      await resolution of all promises in pendingPromises
+  - make request to DB for next batch
