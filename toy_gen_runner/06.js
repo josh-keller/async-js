@@ -1,3 +1,6 @@
+// The previous example will not work if you want the function to return a
+// value. The run() function below solves this.
+
 function yellify(str) {
   return new Promise(resolve => {
     setTimeout(() => resolve(str.toUpperCase()), 500);
@@ -44,5 +47,3 @@ function *soExcited(input) {
 }
 
 run(soExcited, "Hi").then(val => console.log(val));
-run(soExcited, "There!").then(val => console.log(val));
-run(soExcited, "FRIEND!").then(val => console.log(val));

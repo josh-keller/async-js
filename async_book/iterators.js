@@ -1,3 +1,5 @@
+// Basic structure of an iterable showing iterator with components and returns
+
 const iterable = {
   [Symbol.iterator]() {
     let done = false;

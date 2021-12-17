@@ -1,14 +1,15 @@
+// Here is an example of how we can use a runner function to pass values back
+// and forth to a generator. You would never actually need to do this in
+// synchronous code, but it is a good previous step to understand how the
+// asynchronous version works.
+
 function yelling(str) {
   return str.toUpperCase();
 }
 
-
-
 function withExcitement(str) {
   return str + "!!!";
 }
-
-
 
 function run(generator, ...args) {
   let iterator = generator(...args);
@@ -21,17 +22,10 @@ function run(generator, ...args) {
   }
 }
 
-
-
-
-
-
 function *soExcited(input) {
   let excited = yield withExcitement(input);
   let loudAndExcited = yield yelling(excited);
   console.log(loudAndExcited);
 }
 
-run(soExcited, "Hi");
-// run(soExcited, "There!");
-// run(soExcited, "FRIEND!");
+run(soExcited, "Hi");  // output -> "HI!!!"

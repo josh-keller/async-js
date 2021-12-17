@@ -23,11 +23,11 @@ const srcArr = [
 
 const asyncIterator = srcArr[Symbol.asyncIterator]();
 
-asyncIterator.next().then(({value}) => console.log(value));
+// asyncIterator.next().then(({value}) => console.log(value));
 
-// (async function() {
-//   for await (const data of asyncIterator) {
-//     console.log(data.firstName);
-//   }
-// }())
+(async function() {
+  for await (const data of asyncIterator) {
+    console.log(data.firstName);
+  }
+}())
 

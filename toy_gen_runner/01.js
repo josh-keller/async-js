@@ -1,3 +1,5 @@
+// A basic, synchronous generator
+
 function *gen() {
   yield "hi"
   yield "there"

@@ -1,3 +1,5 @@
+import fetch from 'node-fetch';
+
 async function* generator(repo) {
   while (true) {
     const response = await fetch(repo);

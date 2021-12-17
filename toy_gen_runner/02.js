@@ -1,3 +1,5 @@
+// Synchronous code
+
 function yelling(str) {
   return str.toUpperCase();
 }
@@ -12,6 +14,4 @@ function soExcited(input) {
   console.log(loudAndExcited);
 }
 
-soExcited("Hi");
-soExcited("There!");
-soExcited("FRIEND!");
+soExcited("Hi"); // output -> HI!!!
