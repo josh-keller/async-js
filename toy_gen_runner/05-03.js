@@ -18,7 +18,7 @@ async function soExcited(input) {
   console.log(loudAndExcited);
 }
 
-// This function will not run without the gen runner, but see the similarit in
+// This function will not run without the gen runner, but see the similarity in
 // syntax between using a gen runner and async/await:
 function *soExcitedGen(input) {
   let excited = yield excitrr(input);
